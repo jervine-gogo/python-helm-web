@@ -17,6 +17,6 @@ Upon hitting submit the application will then execute a helm history against the
 
 The Namespace has been added to the usual output that the 'helm history' command would return. A hidden field containing the Chart name is also included.
 
-*At the moment, the namespace field is unnecessary, however wehn/if the application is deployed against a helm  ersion 3 environment, the namespace will be important.*
+*At the moment, the namespace field is unnecessary, however wehn/if the application is deployed against a helm  version 3 environment, the namespace will be important.*
 
 Each deployment revision is displayed, with the most recent revision displayed at the bottom of the table. Hitting the 'Deploy' button will trigger helm to rollback (or forward) to the revision selected.
