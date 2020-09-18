@@ -1,0 +1,65 @@
+<html>
+  <head>
+    <title>Select Namespace and Deployment *TESTING*</title>
+    <link rel="stylesheet" media="screen" href ="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/bootstrap-theme.min.css">
+    <meta name="viewport" content = "width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+  </head>
+  <h2>Select both a namespace and deployment</h2>
+  <body onload="myFunction()">
+    <dl>
+      <p>
+        {{ form.csrf_token }}
+        <div class="row">
+          <div class="col-xs-12">
+            <form class="col-sm-6" method="post" action="/deploySelect">
+              <div class = "row">
+                <div class = "col-sm-6">
+                  <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">Namespace:</span>
+                    {{ form.namespace(class_="form-control") }}
+                  </div>
+                </div>
+                <div class = "col-sm-6">
+                  <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon2">Deployment:</span>
+                    {{ form.deployment(class_="form-control") }}
+                  </div>
+                </div>
+              </div>
+              <p>
+                {{ form.submitButton(class_="btn btn-success") }}
+                <a class="btn btn-danger" href="/" role="button">Cancel</a>
+              </p>
+            </form>
+          </div>
+        </div>
+      </p>
+    </dl>
+
+    <script>
+      var namespaceSelect = document.getElementById("namespace");
+      var deploymentSelect = document.getElementById("deployment");
+      
+      namespaceSelect.onchange = function() {myFunction()};
+
+      function myFunction() {
+            
+        namespace = namespaceSelect.value;
+          
+        fetch('/nsLookup/' + namespace).then(function(response) {
+          response.json().then(function(data) {
+            var optionHTML = '';
+            for (var deployment of data.items) {
+              optionHTML += '<option value="' + deployment.metadata.name + '">' + deployment.metadata.name + '</option>';
+            }
+            deploymentSelect.innerHTML = optionHTML;
+          })
+              
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,6 @@
+Flask
+Werkzeug
+flask_table
+Flask-Bootstrap
+flask_wtf
+wtforms_components

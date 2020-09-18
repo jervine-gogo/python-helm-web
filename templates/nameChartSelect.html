@@ -1,0 +1,76 @@
+<html>
+  <head>
+    <title>Select Namespace and Chart *TESTING*</title>
+    <link rel="stylesheet" media="screen" href ="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/bootstrap-theme.min.css">
+    <meta name="viewport" content = "width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+  </head>
+  <h2>Select both a namespace and chart</h2>
+  <body onload="myFunction()">
+    <dl>
+      <p>
+        {{ form.csrf_token }}
+        <div class="row">
+          <div class="col-xs-12">
+            <form class="col-sm-6" method="post" action="/chartSelect">
+              <div class = "row">
+                <div class = "col-sm-6">
+                  <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">Tiller Namespace:</span>
+                    {{ form.tiller_ns(class_="form-control") }}
+                  </div>
+                </div>
+                <div class = "col-sm-6">
+                  <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon2">Namespace:</span>
+                    {{ form.namespace(class_="form-control") }}
+                  </div>
+                </div>
+              </div>
+              <div class = "row">
+                <div class = "col-sm-12">
+                  <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon3">Chart:</span>
+                    {{ form.chart(class_="form-control") }}
+                  </div>
+                </div>
+              </div>
+              <p>
+                {{ form.submitButton(class_="btn btn-success") }}
+                <a class="btn btn-danger" href="/" role="button">Cancel</a>
+              </p>
+            </form>
+          </div>
+        </div>
+      </p>
+    </dl>
+
+    <script>
+      var tillerSelect = document.getElementById("tiller_ns");
+      var namespaceSelect = document.getElementById("namespace");
+      var chartSelect = document.getElementById("chart");
+      
+      tillerSelect.onchange = function() {myFunction()};
+      namespaceSelect.onchange = function() {myFunction()};
+      
+      function myFunction() {
+        
+        tiller_ns = tillerSelect.value;    
+        namespace = namespaceSelect.value;
+          
+        fetch('/nsLookup/' + tiller_ns + '/' + namespace).then(function(response) {
+          response.json().then(function(data) {
+            var optionHTML = '';
+            for (var chart of data.Releases) {
+              optionHTML += '<option value="' + chart.Name + '">' + chart.Name + '</option>';
+            }
+            chartSelect.innerHTML = optionHTML;
+          })
+              
+        });
+      }
+    </script>
+  </body>
+</html>
