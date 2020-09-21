@@ -10,7 +10,7 @@ ENV LANG='en_US.UTF-8' \
 
 RUN apt update && \
     apt install -y python3 gcc python3-pip python3-dev git curl && \
-    adduser -D python && \
+    adduser --system --no-create-home --group python && \
     mkdir /data && cd /data && git clone --single-branch --branch SRE-617 https://github.com/jervine-gogo/python-helm-web /data && \
     pip3 install -r /data/requirements.txt && \
     curl -L "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl" -o /usr/local/bin/kubectl && \
