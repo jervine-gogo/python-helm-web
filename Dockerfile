@@ -12,7 +12,7 @@ RUN apk update && \
     apk -U upgrade --ignore alpine-baselayout && \
     apk -U add python3 gcc py3-pip python3-dev musl-dev libffi-dev git curl && \
     adduser -D python && \
-    mkdir /data && cd /data && git clone --single-branch --branch SRE-615 https://github.com/jervine-gogo/python-helm-web /data && \
+    mkdir /data && cd /data && git clone --single-branch --branch master https://github.com/jervine-gogo/python-helm-web /data && \
     pip3 install -r /data/requirements.txt && \
     curl -L "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl" -o /usr/local/bin/kubectl && \
     chmod 755 /usr/local/bin/kubectl && \
