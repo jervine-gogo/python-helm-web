@@ -16,7 +16,7 @@ RUN apt update && \
     curl -L "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl" -o /usr/local/bin/kubectl && \
     chmod 755 /usr/local/bin/kubectl && \
     curl -L https://get.helm.sh/helm-v2.13.1-linux-amd64.tar.gz -o /tmp/helm-2.13.1.tgz && \
-    tar -zxvf /tmp/helm-2.13.1.tgz --strip-components=1 -C /usr/local/bin linux-amd64/helm && \
+    tar -zxvf /tmp/helm-2.13.1.tgz --strip-components=1 -C /usr/local/bin linux-amd64/helm 
 
 EXPOSE 3000
 
