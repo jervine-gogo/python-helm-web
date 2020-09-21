@@ -19,7 +19,8 @@ def chartVersions():
     namespace = request.form['namespace']
     tiller_ns = request.form['tiller_ns']
     chart = request.form['chart']
-    chartVersions = get_chartdata(tiller_ns, namespace, chart)
+    records = request.form['records']
+    chartVersions = get_chartdata(tiller_ns, namespace, chart, records)
     table = chartVersionTable(chartVersions)
     table.border = True
     table.classes = ['table-striped', 'table-condensed', 'table-hover']

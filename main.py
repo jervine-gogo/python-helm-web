@@ -65,8 +65,8 @@ def get_charts(tiller_ns, namespace):
     data = json.loads(output)
     return data
 
-def get_chartdata(tiller_ns, namespace, chart):
-    command = "/usr/local/bin/helm --tiller-namespace " + tiller_ns + " history " + chart + " --output json" #helm2
+def get_chartdata(tiller_ns, namespace, chart, records):
+    command = "/usr/local/bin/helm --tiller-namespace " + tiller_ns + " history " + chart + " --max " + records + " --output json" #helm2
     #command = "/usr/local/bin/helm -n " + namespace + " history " + chart + " -ojson" #helm3
     info(f"Running command: {command}")
     try:
