@@ -8,9 +8,10 @@ ENV LANG='en_US.UTF-8' \
     FLASK_APP=/data/app-dev/app.py \
     VERSION=1.1.4
 
-RUN apt install -y python3 gcc python3-pip python3-dev git curl && \
+RUN apt update && \
+    apt install -y python3 gcc python3-pip python3-dev git curl && \
     adduser -D python && \
-    mkdir /data && cd /data && git clone --single-branch --branch master https://github.com/jervine-gogo/python-helm-web /data && \
+    mkdir /data && cd /data && git clone --single-branch --branch SRE-617 https://github.com/jervine-gogo/python-helm-web /data && \
     pip3 install -r /data/requirements.txt && \
     curl -L "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl" -o /usr/local/bin/kubectl && \
     chmod 755 /usr/local/bin/kubectl && \
