@@ -6,7 +6,7 @@ LABEL MAINTAINER="Jonathan Ervine <jonathan.ervine@gogox.com>"
 ENV LANG='en_US.UTF-8' \
     LANGUAGE='en_US.UTF-8' \
     FLASK_APP=/data/app-dev/app.py \
-    VERSION=1.1.3
+    VERSION=1.1.4
 
 RUN apk update && \
     apk -U upgrade --ignore alpine-baselayout && \
