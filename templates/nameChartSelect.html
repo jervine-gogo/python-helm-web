@@ -70,13 +70,17 @@
           
         fetch('/nsLookup/' + tiller_ns + '/' + namespace).then(function(response) {
           response.json().then(function(data) {
-            var optionHTML = '';
-            for (var chart of data.Releases) {
-              optionHTML += '<option value="' + chart.Name + '">' + chart.Name + '</option>';
+            if (data != 'EMPTY') {
+              var optionHTML = '';
+              for (var chart of data.Releases) {
+                optionHTML += '<option value="' + chart.Name + '">' + chart.Name + '</option>';
+              }
+              chartSelect.innerHTML = optionHTML;
             }
-            chartSelect.innerHTML = optionHTML;
-          })
-              
+            else {
+              chartSelect.innerHTML = "";
+            }
+          });
         });
       }
     </script>
