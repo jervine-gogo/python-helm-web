@@ -68,7 +68,6 @@ def get_charts(tiller_ns, namespace):
         return data
     else:
         error(f"Output not found")
-        #data = '{"Next":"","Releases":[{"Name":"","Revision":2,"Updated":"","Status":"","Chart":"","AppVersion":"","Namespace":""},{"Name":"helm-web","Revision":1,"Updated":"Thu Oct  8 05:28:25 2020","Status":"DEPLOYED","Chart":"helm-web-0.1.0","AppVersion":"latest","Namespace":"infra-tools"},{"Name":"logstash-dev","Revision":1,"Updated":"Thu Oct  8 03:11:26 2020","Status":"DEPLOYED","Chart":"logstash-2.3.0","AppVersion":"7.1.1","Namespace":"monitoring"},{"Name":"nginx-dev","Revision":3,"Updated":"Thu Oct  8 05:24:16 2020","Status":"DEPLOYED","Chart":"ingress-nginx-2.0.0","AppVersion":"0.31.0","Namespace":"ingress"},{"Name":"oauth2-proxy","Revision":2,"Updated":"Wed Oct 21 03:49:52 2020","Status":"FAILED","Chart":"oauth2-proxy-3.2.2","AppVersion":"5.1.0","Namespace":"infra-tools"}]}'
         data = 'EMPTY'
         return data
 
