@@ -22,12 +22,6 @@
                     {{ form.tiller_ns(class_="form-control") }}
                   </div>
                 </div>
-                <div class = "col-sm-6">
-                  <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon2">Namespace:</span>
-                    {{ form.namespace(class_="form-control") }}
-                  </div>
-                </div>
               </div>
               <div class = "row">
                 <div class = "col-sm-12">
@@ -57,18 +51,15 @@
 
     <script>
       var tillerSelect = document.getElementById("tiller_ns");
-      var namespaceSelect = document.getElementById("namespace");
       var chartSelect = document.getElementById("chart");
       
       tillerSelect.onchange = function() {myFunction()};
-      namespaceSelect.onchange = function() {myFunction()};
       
       function myFunction() {
         
         tiller_ns = tillerSelect.value;    
-        namespace = namespaceSelect.value;
           
-        fetch('/nsLookup/' + tiller_ns + '/' + namespace).then(function(response) {
+        fetch('/nsLookup/' + tiller_ns + '/default').then(function(response) {
           response.json().then(function(data) {
             if (data != 'EMPTY') {
               var optionHTML = '';
