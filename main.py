@@ -63,13 +63,10 @@ def get_charts(tiller_ns, namespace):
         raise err
     info(f"Output from command:\n{output}")
     if output:
-        error(f"Output found")
         data = json.loads(output)
-        return data
     else:
-        error(f"Output not found")
         data = 'EMPTY'
-        return data
+    return data
 
 def sortRevision(n):
     return n['revision']
