@@ -9,7 +9,6 @@ from flask_bootstrap import Bootstrap
 
 class deploySelectForm(FlaskForm):
     tiller_ns = SelectField('tiller_ns', choices=[], coerce=str)
-    namespace = SelectField('namespace', choices=[], coerce=str)
     chart = SelectField('chart', choices=[])
     version = SelectField('remember me') # Added if/when I want to add additional helm version options
     records = SelectField('records', choices=[('10', '10'), ('20', '20'), ('30', '30'), ('40', '40'), ('50', '50'), ('100', '100'), ('150', '150'), ('200', '200'), ('256', '256 (max)')], default=['10'])
