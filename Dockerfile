@@ -14,8 +14,6 @@ RUN apk update && \
     adduser -D python && \
     mkdir /data && cd /data && git clone --single-branch --branch master https://github.com/jervine-gogo/python-helm-web /data && \
     pip3 install -r /data/requirements.txt && \
-    curl -L "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl" -o /usr/local/bin/kubectl && \
-    chmod 755 /usr/local/bin/kubectl && \
     curl -L https://get.helm.sh/helm-v2.13.1-linux-amd64.tar.gz -o /tmp/helm-2.13.1.tgz && \
     tar -zxvf /tmp/helm-2.13.1.tgz --strip-components=1 -C /usr/local/bin linux-amd64/helm && \
     rm -rf /tmp/src && rm -rf /var/cache/apk/* 

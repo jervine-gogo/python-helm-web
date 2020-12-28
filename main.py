@@ -30,15 +30,9 @@ def get_tiller_namespaces():
     return data
 
 def get_deployments(namespace):
-    command = "/usr/local/bin/kubectl -n " + namespace + " get deploy -ojson"
-    info(f"Running command: {command}")
-    try:
-        output = check_output(command.split(" "), stderr=STDOUT).decode("utf-8")
-    except CalledProcessError as err:
-        error(err.output.decode("utf-8"))
-        raise err
-    info(f"Output from command:\n{output}")
-    data = json.loads(output)
+    config.load_incluster_config()
+    v1 = client.CoreV1Api()
+    data = v1.list_namespaced_deployment(namespace)
     return data
 
 def get_charts(tiller_ns, namespace):
