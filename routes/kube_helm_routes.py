@@ -9,7 +9,7 @@ import json
 def index():
     tiller_ns = get_tiller_namespaces()
     form = deploySelectForm()
-    form.tiller_ns.choices = [(name['metadata']['namespace'], name['metadata']['namespace']) for name in tiller_ns['items']]
+    form.tiller_ns.choices = [(name.metadata.namespace, name.metadata.namespace) for name in tiller_ns.items]
     return render_template('nameChartSelect.html', tiller_ns=tiller_ns, form=form)
 
 @routes.route('/chartSelect', methods=['POST'])

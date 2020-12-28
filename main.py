@@ -13,43 +13,26 @@ from routes import *
 from logging import error, info
 from subprocess import STDOUT, CalledProcessError, check_output
 from itertools import islice
+from kubernetes import client, config
 
 app.register_blueprint(routes)
 
 def get_namespaces():
-    command = "/usr/local/bin/kubectl get ns -ojson"
-    info(f"Running command: {command}")
-    try:
-        output = check_output(command.split(" "), stderr=STDOUT).decode("utf-8")
-    except CalledProcessError as err:
-        error(err.output.decode("utf-8"))
-        raise err
-    info(f"Output from command:\n{output}")
-    data = json.loads(output)
-    return data
+    config.load_incluster_config()
+    v1 = client.CoreV1Api()
+    ns = v1.list_namespace()
+    return ns
 
 def get_tiller_namespaces():
-    command = "/usr/local/bin/kubectl get deploy --all-namespaces -l name=tiller -ojson"
-    info(f"Running command: {command}")
-    try:
-        output = check_output(command.split(" "), stderr=STDOUT).decode("utf-8")
-    except CalledProcessError as err:
-        error(err.output.decode("utf-8"))
-        raise err
-    info(f"Output from command:\n{output}")
-    data = json.loads(output)
+    config.load_incluster_config()
+    v1 = client.AppsV1Api()
+    data = v1.list_deployment_for_all_namespaces(label_selector='name=tiller')
     return data
 
 def get_deployments(namespace):
-    command = "/usr/local/bin/kubectl -n " + namespace + " get deploy -ojson"
-    info(f"Running command: {command}")
-    try:
-        output = check_output(command.split(" "), stderr=STDOUT).decode("utf-8")
-    except CalledProcessError as err:
-        error(err.output.decode("utf-8"))
-        raise err
-    info(f"Output from command:\n{output}")
-    data = json.loads(output)
+    config.load_incluster_config()
+    v1 = client.AppsV1Api()
+    data = v1.list_namespaced_deployment(namespace)
     return data
 
 def get_charts(tiller_ns, namespace):
