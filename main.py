@@ -25,7 +25,7 @@ def get_namespaces():
 
 def get_tiller_namespaces():
     config.load_incluster_config()
-    v1 = client.CoreV1Api()
+    v1 = client.AppsV1Api()
     data = v1.list_deployment_for_all_namespaces(label_selector='name=tiller')
     return data
 
