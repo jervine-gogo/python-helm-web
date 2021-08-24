@@ -36,7 +36,7 @@ def get_deployments(namespace):
     return data
 
 def get_charts(tiller_ns, namespace):
-    command = "/usr/local/bin/helm --tiller-namespace " + tiller_ns + " list --output json" #helm2
+    command = "/usr/local/bin/helm --tiller-namespace " + tiller_ns + " list --all -m 999999 --output json" #helm2
     #command = "/usr/local/bin/helm -n " + namespace + " list -ojson" #helm3
     info(f"Running command: {command}")
     try:
